@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signing, requireSigning } = require("../controllers/auth");
+const { signup, signing } = require("../controllers/auth");
+const {
+  validateSignupRequest,
+  isRequestValidate,
+  validateSigningRequest,
+} = require("../validator/auth");
 
 //Routes
-router.post("/signing", signing);
-router.post("/signup", signup);
+router.post("/signing", validateSigningRequest, isRequestValidate, signing);
+router.post("/signup", validateSignupRequest, isRequestValidate, signup);
 
-router.post("/profile", requireSigning, (req, res) => {
-  res.status(200).json({
-    message: "Ok",
-  });
-});
 //Export file
 module.exports = router;
