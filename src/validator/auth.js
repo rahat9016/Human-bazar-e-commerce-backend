@@ -17,9 +17,9 @@ exports.validateSigningRequest = [
     .matches(/\d/)
     .withMessage("must contain a number"),
 ];
+
 exports.isRequestValidate = (req, res, next) => {
   const errors = validationResult(req);
-  console.log(req.body);
   if (errors.array().length > 0) {
     return res.status(400).json({ error: errors.array()[0].msg });
   }

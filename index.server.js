@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./src/routes/auth");
 const adminRoutes = require("./src/routes/admin/auth");
+const categoryRoutes = require("./src/routes/category");
+const productRoutes = require("./src/routes/product");
 const morgan = require("morgan");
 const cors = require("cors");
 const env = require("dotenv").config();
@@ -31,6 +33,8 @@ app.use(cors());
 //Router
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
+app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
 
 //404 error handler
 app.use((req, res, next) => {

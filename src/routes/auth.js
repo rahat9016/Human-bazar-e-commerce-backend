@@ -1,4 +1,5 @@
 const express = require("express");
+const { requireSigning } = require("../common-middleware");
 const router = express.Router();
 const { signup, signing } = require("../controllers/auth");
 const {

@@ -45,9 +45,13 @@ exports.signing = async (req, res) => {
       //check password valid
       if (user.authenticate(req.body.password)) {
         // if signing is valid then create token
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
-          expiresIn: "1h",
-        });
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET_KEY,
+          {
+            expiresIn: "1h",
+          }
+        );
         //Destructure
         const { _id, firstName, lastName, email, role, fullName } = user;
         res.status(200).json({
@@ -72,12 +76,4 @@ exports.signing = async (req, res) => {
       });
     }
   });
-};
-
-//Require signing
-exports.requireSigning = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-  req.user = user;
-  next();
 };
