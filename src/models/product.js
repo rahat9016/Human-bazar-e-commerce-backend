@@ -15,31 +15,36 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    quantity: {
+      type: Number,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
       trim: true,
     },
     offer: { type: Number },
-    productPicture: [{ img: { type: String } }],
+    productPictures: [{ img: { type: String } }],
     review: [
       {
-        userId: { type: mongoose.Schema.Types.ObjectId },
-        ref: "User",
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         review: String,
       },
     ],
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
+      required: true,
     },
-    createAt: {
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     updatedAt: Date,
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Category", productSchema);
+module.exports = mongoose.model("Product", productSchema);
