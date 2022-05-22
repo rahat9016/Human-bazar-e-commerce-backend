@@ -1,5 +1,6 @@
 const express = require("express");
-const { signing, signup } = require("../../controllers/admin/auth");
+const { requireSigning } = require("../../common-middleware");
+const { signing, signup, signout } = require("../../controllers/admin/auth");
 const {
   isRequestValidate,
   validateSigningRequest,
@@ -16,5 +17,6 @@ router.post(
 );
 router.post("/admin/signup", validateSignupRequest, isRequestValidate, signup);
 
+router.post("/admin/signout", requireSigning, signout);
 //Export file
 module.exports = router;

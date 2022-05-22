@@ -54,6 +54,7 @@ exports.signing = async (req, res) => {
           }
         );
         //Destructure
+        res.cookie("token", token, { expiresIn: "1h" });
         const { _id, firstName, lastName, email, role, fullName } = user;
         res.status(200).json({
           token,
@@ -79,10 +80,9 @@ exports.signing = async (req, res) => {
   });
 };
 
-//Require signing
-exports.requireSigning = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-  req.user = user;
-  next();
+exports.signout = (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "Signout successful..!",
+  });
 };
