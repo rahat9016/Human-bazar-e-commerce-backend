@@ -14,6 +14,7 @@ function createCategories(categories, parentId = null) {
     categoryList.push({
       _id: cate._id,
       name: cate.name,
+      parentId: cate.parentId,
       slug: cate.slug,
       children: createCategories(categories, cate._id),
     });
@@ -38,7 +39,7 @@ exports.addCategory = async (req, res) => {
   cat.save((error, category) => {
     if (error) {
       if (error.keyPattern.slug > 0) {
-        res.status(400).json({ message: "Category already created!" });
+        res.status(400).json({ error: "Category already created!" });
       }
     }
     if (category) {

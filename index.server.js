@@ -7,6 +7,7 @@ const adminRoutes = require("./src/routes/admin/auth");
 const categoryRoutes = require("./src/routes/category");
 const productRoutes = require("./src/routes/product");
 const cartRoutes = require("./src/routes/cart");
+const initialDataRoutes = require("./src/routes/admin/initialdata");
 const morgan = require("morgan");
 const cors = require("cors");
 const env = require("dotenv").config();
@@ -39,6 +40,7 @@ app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
+app.use("/api", initialDataRoutes);
 
 //404 error handler
 app.use((req, res, next) => {

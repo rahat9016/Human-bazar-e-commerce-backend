@@ -1,7 +1,8 @@
 const Product = require("../models/product");
 const slugify = require("slugify");
 exports.addProduct = async (req, res) => {
-  const { name, price, description, category, createdBy, quantity } = req.body;
+  const { name, price, description, categoryId, createdBy, quantity } =
+    req.body;
   let productPictures = [];
   if (req.files.length > 0) {
     productPictures = req.files.map((file) => {
@@ -15,7 +16,7 @@ exports.addProduct = async (req, res) => {
     price,
     description,
     productPictures,
-    category,
+    category: categoryId,
     createdBy: req.user._id,
   });
   product.save((error, product) => {
