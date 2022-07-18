@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./src/routes/auth");
 const adminRoutes = require("./src/routes/admin/auth");
+const pageRoutes = require("./src/routes/admin/page");
 const categoryRoutes = require("./src/routes/category");
 const productRoutes = require("./src/routes/product");
 const cartRoutes = require("./src/routes/cart");
@@ -33,7 +34,6 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(cors());
 app.use("/public", express.static(path.join(__dirname, "src/uploads")));
-console.log(path.join(__dirname, "uploads"));
 //Router
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
@@ -41,6 +41,7 @@ app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", initialDataRoutes);
+app.use("/api", pageRoutes);
 
 //404 error handler
 app.use((req, res, next) => {
