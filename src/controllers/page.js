@@ -40,3 +40,15 @@ exports.createPage = (req, res) => {
     }
   });
 };
+exports.getPage = (req, res) => {
+  const { category, type } = req.params;
+  console.log(category, type);
+  if (type === "page") {
+    Page.findOne({ category: category }).exec((error, page) => {
+      if (error) return res.status(400).json({ error });
+      if (page) {
+        return res.status(200).json({ page });
+      }
+    });
+  }
+};

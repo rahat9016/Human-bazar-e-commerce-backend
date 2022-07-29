@@ -45,7 +45,7 @@ exports.signing = async (req, res) => {
     //if get user then signing
     if (user) {
       //check password valid
-      if (user.authenticate(req.body.password)) {
+      if (user.authenticate(req.body.password) && user.role === "user") {
         // if signing is valid then create token
         const token = jwt.sign(
           { _id: user._id, role: user.role },
@@ -69,7 +69,7 @@ exports.signing = async (req, res) => {
         });
       } else {
         res.status(400).json({
-          message: "Invalid Password!",
+          message: "Something went wrong!",
         });
       }
     } else {
