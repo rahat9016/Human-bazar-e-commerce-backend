@@ -8,6 +8,7 @@ const pageRoutes = require("./src/routes/admin/page");
 const categoryRoutes = require("./src/routes/category");
 const productRoutes = require("./src/routes/product");
 const cartRoutes = require("./src/routes/cart");
+const addressRoutes = require("./src/routes/address");
 const initialDataRoutes = require("./src/routes/admin/initialdata");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -42,6 +43,7 @@ app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", initialDataRoutes);
 app.use("/api", pageRoutes);
+app.use("/api", addressRoutes);
 
 //404 error handler
 app.use((req, res, next) => {

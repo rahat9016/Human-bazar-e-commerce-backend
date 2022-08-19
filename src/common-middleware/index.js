@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
 exports.upload = multer({ storage });
 //Require signing
 const jwt = require("jsonwebtoken");
+
 exports.requireSigning = (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(" ")[1];
